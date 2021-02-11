@@ -1,0 +1,27 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/02/Inc16.hdl
+
+/**
+ * 16-bit chip to handle the zero + negation bits in the ALU.
+ * in = x[16], a 16-bit data input, z a 1-bit zero input, and n, a 1-bit negation input
+ * if (z == 0 && n == 0) out=in
+ * if (z == 1 && n == 0) out=0 (16 bits)
+ * if (z == 0 && n == 1) out=Not16(in)
+ * if (z == 1 && n == 1) out=[16] where [0-15] = 1
+ */
+
+CHIP ZeroNeg16 {
+    IN
+	x[16], // 16-bit input
+	z,     // zero the input?
+	n;     // negate the input?
+    OUT out[16];
+
+    PARTS:
+    Zero16(out=zero);
+    Not16(in=x,out=notX);
+    Mux16(a=x,b=zero,sel=z,out=zOut);
+    Mux16(a=zOut,b=notX,sel=n,out=out);
+}

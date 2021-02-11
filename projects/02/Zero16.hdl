@@ -8,7 +8,7 @@
  * out = [16] where [0-15] = 0 or false
  */
 
-CHIP Inc16 {
+CHIP Zero16 {
     IN ;
     OUT out[16];
 
