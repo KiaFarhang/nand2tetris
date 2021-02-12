@@ -21,7 +21,7 @@ CHIP ZeroNeg16 {
 
     PARTS:
     Zero16(out=zero);
-    Not16(in=x,out=notX);
     Mux16(a=x,b=zero,sel=z,out=zOut);
-    Mux16(a=zOut,b=notX,sel=n,out=out);
+    Not16(in=zOut,out=notZOut);
+    Mux16(a=zOut,b=notZOut,sel=n,out=out);
 }
